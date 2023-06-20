@@ -13,7 +13,8 @@ build/
 .settings
 .springBeans
 .sts4-cache
-**/application.properties  
+**/application.properties
+**/application-oauth.properties
 bin/
 !**/src/main/**/bin/
 !**/src/test/**/bin/
