@@ -5,8 +5,8 @@ import com.board.board.comment.dto.CommentSaveDto;
 import com.board.board.comment.dto.CommentViewDto;
 import com.board.board.comment.repository.CommentRepository;
 import com.board.board.post.Post;
-import com.board.board.post.dto.PostsSaveDto;
-import com.board.board.post.repository.PostsRepository;
+import com.board.board.post.dto.PostSaveDto;
+import com.board.board.post.repository.PostRepository;
 import com.board.board.util.Result;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -16,7 +16,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -25,14 +24,14 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class TestController {
 
-    private final PostsRepository postsRepository;
+    private final PostRepository postsRepository;
     private final CommentRepository commentRepository;
 
     @GetMapping("/")
     @Transactional
     public Result< List<CommentViewDto>> abc(){
-        PostsSaveDto postsSaveDto = new PostsSaveDto("abc", "내용", "공주");
-        Post postResult = postsRepository.save(postsSaveDto.DtoToPosts());
+        PostSaveDto postSaveDto = new PostSaveDto("abc", "내용", "공주");
+        Post postResult = postsRepository.save(postSaveDto.DtoToPosts());
         CommentSaveDto commentSaveDto=new CommentSaveDto("내용","고공");
         Comment save1 = commentRepository.save(commentSaveDto.DtoToComment());
         Comment save2 = commentRepository.save(commentSaveDto.DtoToComment());
@@ -59,10 +58,9 @@ public class TestController {
         Optional<Post> byId = postsRepository.findById(id);
         if(byId.isPresent()){
             Post post = byId.get();
-            post.updatePosts(title,content);
+            post.updatePost(title,content);
             return "yes";
         }
         return "no";
-
     }
 }

@@ -2,12 +2,11 @@ package com.board.board.post.dto;
 
 import com.board.board.post.Post;
 import lombok.Getter;
-import lombok.Setter;
 import lombok.ToString;
 
 @Getter
 @ToString
-public class PostsSaveDto {
+public class PostSaveDto {
 
     private String title;
     private String content;
@@ -15,19 +14,19 @@ public class PostsSaveDto {
     private String writerId;
     private Long viewCount=0L;
 
-    public PostsSaveDto(String title, String content, String writerId) {
+    public PostSaveDto(String title, String content, String writerId) {
         this.title = title;
         this.content = content;
         this.writerId = writerId;
     }
-    public PostsSaveDto(String title, String content, String writerId, Long viewCount) {
+    public PostSaveDto(String title, String content, String writerId, Long viewCount) {
         this.title = title;
         this.content = content;
         this.writerId = writerId;
         this.viewCount=viewCount;
     }
 
-    public PostsSaveDto(Post post) {
+    public PostSaveDto(Post post) {
         this.title = post.getTitle();
         this.content = post.getContent();
         this.writerId = post.getWriterId();

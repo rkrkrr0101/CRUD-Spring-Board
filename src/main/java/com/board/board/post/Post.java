@@ -49,7 +49,7 @@ public class Post {
         viewCount++;
         return viewCount;
     }
-    public Long updatePosts(String title,String content){
+    public Long updatePost(String title, String content){
         this.title=title;
         this.content=content;
         return id;
