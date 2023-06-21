@@ -1,11 +1,11 @@
 package com.board.board;
 
 import com.board.board.comment.Comment;
-import com.board.board.comment.dto.CommentSaveDto;
-import com.board.board.comment.dto.CommentViewDto;
+import com.board.board.comment.dto.CommentRequestDto;
+import com.board.board.comment.dto.CommentResponseDto;
 import com.board.board.comment.repository.CommentRepository;
 import com.board.board.post.Post;
-import com.board.board.post.dto.PostSaveDto;
+import com.board.board.post.dto.PostRequestDto;
 import com.board.board.post.repository.PostRepository;
 import com.board.board.util.Result;
 import lombok.RequiredArgsConstructor;
@@ -29,13 +29,13 @@ public class TestController {
 
     @GetMapping("/")
     @Transactional
-    public Result< List<CommentViewDto>> abc(){
-        PostSaveDto postSaveDto = new PostSaveDto("abc", "내용", "공주");
-        Post postResult = postsRepository.save(postSaveDto.DtoToPosts());
-        CommentSaveDto commentSaveDto=new CommentSaveDto("내용","고공");
-        Comment save1 = commentRepository.save(commentSaveDto.DtoToComment());
-        Comment save2 = commentRepository.save(commentSaveDto.DtoToComment());
-        Comment save3 = commentRepository.save(commentSaveDto.DtoToComment());
+    public Result< List<CommentResponseDto>> abc(){
+        PostRequestDto postRequestDto = new PostRequestDto("abc", "내용", "공주");
+        Post postResult = postsRepository.save(postRequestDto.DtoToPosts());
+        CommentRequestDto commentRequestDto =new CommentRequestDto("내용","고공");
+        Comment save1 = commentRepository.save(commentRequestDto.DtoToComment());
+        Comment save2 = commentRepository.save(commentRequestDto.DtoToComment());
+        Comment save3 = commentRepository.save(commentRequestDto.DtoToComment());
         postResult.addComment(save1);
         postResult.addComment(save2);
         postResult.addComment(save3);
