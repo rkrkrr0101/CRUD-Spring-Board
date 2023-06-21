@@ -17,7 +17,7 @@ import java.time.LocalDateTime;
 @Getter
 public class Comment {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String content;
@@ -28,13 +28,12 @@ public class Comment {
     private LocalDateTime lastUpdateDate;
     private String writerId;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "POST_ID")
-    private Post post;
 
-    public Comment(String content, String writerId, Post post) {
+
+
+    public Comment(String content, String writerId) {
         this.content = content;
         this.writerId = writerId;
-        this.post = post;
+
     }
 }

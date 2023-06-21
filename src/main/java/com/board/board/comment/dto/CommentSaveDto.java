@@ -11,19 +11,19 @@ import lombok.ToString;
 public class CommentSaveDto {
     private final String content;
     private final String writerId;
-    private Post post;
 
-    public CommentSaveDto(String content, String writerId, Post post) {
+
+    public CommentSaveDto(String content, String writerId) {
         this.content = content;
         this.writerId = writerId;
-        this.post = post;
+
     }
     public CommentSaveDto(Comment comment) {
         this.content = comment.getContent();
         this.writerId = comment.getWriterId();
     }
     public Comment DtoToComment(){
-        return new Comment(content,writerId,post);
+        return new Comment(content,writerId);
     }
 
 }
