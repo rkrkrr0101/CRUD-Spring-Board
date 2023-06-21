@@ -1,5 +1,6 @@
 package com.board.board.post.controller;
 
+import com.board.board.comment.dto.CommentRequestDto;
 import com.board.board.post.Post;
 import com.board.board.post.dto.PostResponseDto;
 import com.board.board.post.dto.PostRequestDto;
@@ -27,6 +28,10 @@ public class PostController {
     @PostMapping("/save")
     public Long save(@RequestBody PostRequestDto requestDto){
         return postService.save(requestDto);
+    }
+    @PostMapping("/add/comment/{id}")
+    public Long commentSave(@RequestBody CommentRequestDto requestDto,@PathVariable Long id){
+        return postService.addComment(id, requestDto);
     }
     @PostMapping("/plus/viewcount/{id}")
     public Long plusViewCount(@PathVariable Long id){

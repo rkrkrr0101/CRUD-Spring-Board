@@ -31,7 +31,7 @@ public class Post {
     private LocalDateTime lastUpdateDate;
     private String writerId;
     private Long viewCount;
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name="POST_ID")
     @BatchSize(size=20)
     private List<Comment> comments=new ArrayList<>();
