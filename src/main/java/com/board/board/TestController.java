@@ -7,6 +7,7 @@ import com.board.board.comment.repository.CommentRepository;
 import com.board.board.post.Post;
 import com.board.board.post.dto.PostsSaveDto;
 import com.board.board.post.repository.PostsRepository;
+import com.board.board.util.Result;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
@@ -29,31 +30,27 @@ public class TestController {
 
     @GetMapping("/")
     @Transactional
-    public List<CommentViewDto> abc(){
+    public Result< List<CommentViewDto>> abc(){
         PostsSaveDto postsSaveDto = new PostsSaveDto("abc", "내용", "공주");
         Post postResult = postsRepository.save(postsSaveDto.DtoToPosts());
-        CommentSaveDto commentSaveDto=new CommentSaveDto("내용","고공",postResult);
-        commentRepository.save(commentSaveDto.DtoToComment());
-        commentRepository.save(commentSaveDto.DtoToComment());
-        commentRepository.save(commentSaveDto.DtoToComment());
-
+        CommentSaveDto commentSaveDto=new CommentSaveDto("내용","고공");
+        Comment save1 = commentRepository.save(commentSaveDto.DtoToComment());
+        Comment save2 = commentRepository.save(commentSaveDto.DtoToComment());
+        Comment save3 = commentRepository.save(commentSaveDto.DtoToComment());
+        postResult.addComment(save1);
+        postResult.addComment(save2);
+        postResult.addComment(save3);
+        System.out.println("------ ");
         PageRequest pageRequest=PageRequest.of(0,2);
         Page<Post> find = postsRepository.findAll(pageRequest);
         List<Post> content = find.getContent();
         for (Post post : content) {
             System.out.println("posts = " + post.getId());
         }
-        Page<Comment> byPost = commentRepository.findByPost(postResult, pageRequest);
-        List<Comment> comments = byPost.getContent();
-        List<CommentViewDto> viewDto=new ArrayList<>();
-        for (Comment comment : comments) {
-            System.out.println("comment = " + comment.getId());
-
-            viewDto.add(new CommentViewDto(comment));
-        }
 
 
-        return viewDto;
+
+        return new Result<>(null);
         //return postResult.getId().toString();
     }
     @GetMapping("/abc")
