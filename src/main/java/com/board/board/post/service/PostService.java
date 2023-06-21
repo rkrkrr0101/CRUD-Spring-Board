@@ -4,8 +4,11 @@ import com.board.board.comment.Comment;
 import com.board.board.comment.dto.CommentRequestDto;
 import com.board.board.post.Post;
 import com.board.board.post.dto.PostRequestDto;
+import com.board.board.post.dto.PostResponseDto;
 import com.board.board.post.repository.PostRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -48,9 +51,17 @@ public class PostService {
     public Post findPost(Long postId){
         return presentPost(postId);
     }
-//    public List<Post> findPostPaging(){
-//
-//    }
+    public Page<PostResponseDto> findPostsPaging(Pageable pageable){
+        Page<Post> posts = postRepository.findAll(pageable);
+        return posts.map(PostResponseDto::new);
+
+    }
+    public Page<PostResponseDto> findPostsTitlePaging(String title,Pageable pageable){
+        Page<Post> posts = postRepository.findByTitleContaining(title,pageable);
+        return posts.map(PostResponseDto::new);
+
+    }
+
 
     private Post presentPost(Long postId){
         Optional<Post> optionalPost = postRepository.findById(postId);
