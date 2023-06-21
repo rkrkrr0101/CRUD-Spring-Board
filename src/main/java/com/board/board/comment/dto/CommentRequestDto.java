@@ -1,24 +1,22 @@
 package com.board.board.comment.dto;
 
 import com.board.board.comment.Comment;
-import com.board.board.post.Post;
 import lombok.Getter;
-import lombok.Setter;
 import lombok.ToString;
 
 @Getter
 @ToString
-public class CommentSaveDto {
+public class CommentRequestDto {
     private final String content;
     private final String writerId;
 
 
-    public CommentSaveDto(String content, String writerId) {
+    public CommentRequestDto(String content, String writerId) {
         this.content = content;
         this.writerId = writerId;
 
     }
-    public CommentSaveDto(Comment comment) {
+    public CommentRequestDto(Comment comment) {
         this.content = comment.getContent();
         this.writerId = comment.getWriterId();
     }

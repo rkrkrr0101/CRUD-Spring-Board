@@ -2,11 +2,14 @@ package com.board.board.post.dto;
 
 import com.board.board.post.Post;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.ToString;
 
 @Getter
 @ToString
-public class PostSaveDto {
+@NoArgsConstructor
+public class PostRequestDto {
 
     private String title;
     private String content;
@@ -14,19 +17,19 @@ public class PostSaveDto {
     private String writerId;
     private Long viewCount=0L;
 
-    public PostSaveDto(String title, String content, String writerId) {
+    public PostRequestDto(String title, String content, String writerId) {
         this.title = title;
         this.content = content;
         this.writerId = writerId;
     }
-    public PostSaveDto(String title, String content, String writerId, Long viewCount) {
+    public PostRequestDto(String title, String content, String writerId, Long viewCount) {
         this.title = title;
         this.content = content;
         this.writerId = writerId;
         this.viewCount=viewCount;
     }
 
-    public PostSaveDto(Post post) {
+    public PostRequestDto(Post post) {
         this.title = post.getTitle();
         this.content = post.getContent();
         this.writerId = post.getWriterId();
